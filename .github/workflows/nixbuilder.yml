@@ -26,10 +26,9 @@ jobs:
         run: sudo apt-get install zstd
       - name: Start building
         run: |
-          cd dist
-          mkdir ${{ inputs.version }}
-          cd ${{ inputs.version }}
-          find ../../ -type f -name "*.nix" -execdir rsync {} "$HOME"/dist/${{inputd.version}} \;
+          mkdir "$HOME"/dist/${{inputs.version}}
+          cd "$HOME"/dist/${{inputs.version}}
+          find ../../ -type f -name "*.nix" -execdir rsync {} "$HOME"/dist/${{inputs.version}} \;
           
           nix build .#packages.aarch64-linux.sdcard
           nix flake check
