@@ -17,34 +17,42 @@ jobs:
           repository: cupglassDEV/idholidays
           ref: 'master'
           token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: denoland/setup-deno@v1.5.1
       - uses: cachix/install-nix-action@v27
         with:
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Pull everything
         run: git pull
       - name: Install needed deps
-        run: sudo apt-get install nix-bin
+        run: sudo apt-get install zstd
       - name: Go to distribution folder
         run: |
           cd dist
           mkdir ${{ github.event.inputs.version }}
           cd ${{ github.event.inputs.version }}
       - name: Make temp-flake (temporail flake) inside dist folder
-        run: 
+        run: find ../../ -type f -name "*.nix" -exec cp {} ./ \
       - name: Build desktop
-      - name: Build desktop+ssh
-      - name: Build desktop+vnc
-      - name: Build desktop+ssh+vnc
-      - name: delete temp-flake
+      - run: |
+          nix build .#packages.aarch64-linux.sdcard
+          nix flake check
+          deno run ../../build/moveFlakeResult.js ${{ github.event.inputs.version }}-desktop
+      - name: Build desktop+remoteable
+      - run: |
+          nix build .#packages.aarch64-linux-remoteable.sdcard
+          nix flake check
+          deno run ../../build/moveFlakeResult.js ${{ github.event.inputs.version }}-desktop-remoteable
+      - name: Delete temp-flake
+        run: |
+          find ./ -type f -name "*.nix" -exec rm -f {} \
+          find ./ -type f -name "*.lock" -exec rm -f {} \
+      - name: Compress to Facebook Zstandart
+        run: find ./ -type f -name "*.img" -exec zstd {} \
+      - name: Delete Iso, but keep the Zstd compressed Iso
+        run: find ./ -type f -name "*.img" -exec rm -f {} \
       - name: Commit
         run: |
-          git pull
-          cd dist
-          mk 
-          nix build --experimental-command nix-command --experimental-command flake
-          npm install
-          node Up2Date.js
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git commit -am "Build image for version ${{ver}}"
+          git commit -am "Build image for version ${{ github.event.inputs.version }}"
           git push
