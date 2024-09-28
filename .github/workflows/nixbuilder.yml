@@ -9,7 +9,10 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
-    steps:
+    steps: 
+      - if: ${{inputs.version}} == ''
+        name: Check if manual
+        run: echo "Push isnt supported"; exit 1
       - uses: actions/checkout@v4
         with:
           repository: cupglassDEV/rpi-nix
@@ -26,15 +29,15 @@ jobs:
       - name: Go to distribution folder
         run: |
           cd dist
-          mkdir ${{ github.event.inputs.version }}
-          cd ${{ github.event.inputs.version }}
+          mkdir ${{  inputs.version }}
+          cd ${{ inputs.version }}
       - name: Make temp-flake (temporail flake) inside dist folder
         run: find ../../ -type f -name "*.nix" -exec cp {} ./ \
       - name: Build desktop
       - run: |
           nix build .#packages.aarch64-linux.sdcard
           nix flake check
-          deno run ../../build/moveFlakeResult.js ${{ github.event.inputs.version }}-desktop
+          deno run ../../build/moveFlakeResult.js ${{ inputs.version }}-desktop
       - name: Build desktop+remoteable
       - run: |
           nix build .#packages.aarch64-linux-remoteable.sdcard
@@ -52,5 +55,5 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git commit -am "Build image for version ${{ github.event.inputs.version }}"
+          git commit -am "Build image for version ${{ inputs.version }}"
           git push
