@@ -1,0 +1,50 @@
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'     
+        required: true
+      tags:
+        description: 'Test scenario tags'
+jobs:
+  build:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: cupglassDEV/idholidays
+          ref: 'master'
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: cachix/install-nix-action@v27
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: Pull everything
+        run: git pull
+      - name: Install needed deps
+        run: sudo apt-get install nix-bin
+      - name: Go to distribution folder
+        run: |
+          cd dist
+          mkdir ${{ github.event.inputs.version }}
+          cd ${{ github.event.inputs.version }}
+      - name: Make temp-flake (temporail flake) inside dist folder
+        run: 
+      - name: Build desktop
+      - name: Build desktop+ssh
+      - name: Build desktop+vnc
+      - name: Build desktop+ssh+vnc
+      - name: delete temp-flake
+      - name: Commit
+        run: |
+          git pull
+          cd dist
+          mk 
+          nix build --experimental-command nix-command --experimental-command flake
+          npm install
+          node Up2Date.js
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -am "Build image for version ${{ver}}"
+          git push
