@@ -16,7 +16,7 @@
           "profiles/base.nix"
         ];
 
-        system.stateVersion = "${nixosVersion}";
+        system.stateVersion = "23.11";
       };  
       users = {
         #the nix.dev manual is outdated
