@@ -27,9 +27,9 @@ jobs:
       - name: Start building
         run: |
           cd dist
-          mkdir ${{  inputs.version }}
+          mkdir ${{ inputs.version }}
           cd ${{ inputs.version }}
-          find ../../ -type f -name "*.nix" -execdir cp {} ./ \;
+          find ../../ -type f -name "*.nix" -execdir rsync {} "$HOME"/dist/${{inputd.version}} \;
           
           nix build .#packages.aarch64-linux.sdcard
           nix flake check
