@@ -1,5 +1,5 @@
 {
-  description = "KDE Plasma 6 + Programming language tools + RPi4. For Devenv, soon, not now. MADE BY CUPGLASSDEV";
+  description = "KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
   inputs = {
     nixosVersion = "23.11";
     nixpkgs.url = "nixpkgs/nixos-23.11";
@@ -21,15 +21,16 @@
 
         system.stateVersion = "${nixosVersion}";
       };  
-      users = {};
-      #the nix.dev manual is outdated
-      #who the hell, who was using a fricking rpi 1??
-      #and the newer rpi4 dosent respect sysfs for gpio 
-      #users.groups.gpio = {};
-      users.users.${homeUser} = {
-            password = "${password}";
-            isNormalUser = true;
-            extraGroups = ["wheel"];
+      users = {
+        #the nix.dev manual is outdated
+        #who the hell, who was using a fricking rpi 1??
+        #and the newer rpi4 dosent respect sysfs for gpio 
+        #users.groups.gpio = {};
+        users.${homeUser} = {
+              password = "${password}";
+              isNormalUser = true;
+              extraGroups = ["wheel"];
+        };
       };
       services.xserver.enable = true;
       services.displayManager.sddm.enable = true;
@@ -41,7 +42,7 @@
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
-          "./extra.flake.nix"
+          "./extra.conf.nix"
           self.nixosModules.system
           self.nixosModules.users
           self.nixosModules.programs
