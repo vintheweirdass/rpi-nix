@@ -1,5 +1,5 @@
 {
-  description = "KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
+  description = "Optional KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
   inputs = {
     nixosVersion = "23.11";
     nixpkgs.url = "nixpkgs/nixos-23.11";
@@ -42,7 +42,23 @@
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
+          "./apps.conf.nix"
           "./extra.conf.nix"
+          self.nixosModules.system
+          self.nixosModules.users
+          self.nixosModules.programs
+          self.nixosModules.services
+        ];
+      };
+    };
+    packages.aarch64-linux-ssh = {
+      sdcard = nixos-generators.nixosGenerate {
+        system = "aarch64-linux";
+        format = "sd-aarch64";
+        modules = [
+          "./apps.conf.nix"
+          "./extra.conf.nix"
+          "./ssh.conf.nix"
           self.nixosModules.system
           self.nixosModules.users
           self.nixosModules.programs
