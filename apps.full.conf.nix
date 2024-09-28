@@ -9,5 +9,6 @@
         pkgs.zsh
         pkgs.devenv
         pkgs.flox
+        pkgs.wayvnc
   ];
 }
