@@ -1,17 +1,14 @@
 {
   description = "KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
   inputs = {
-    nixosVersion = "23.11";
     nixpkgs.url = "nixpkgs/nixos-23.11";
-    homeUser = "cupglassdev";
-    password = "admin"; #please change this after importing the repo, or you'll be the idiot
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixos-generators, nixosVersion, homeUser, password, ... }:
+  outputs = { self, nixpkgs, nixos-generators, ... }:
   {
     nixosModules = {
       system = {
@@ -26,8 +23,8 @@
         #who the hell, who was using a fricking rpi 1??
         #and the newer rpi4 dosent respect sysfs for gpio 
         #users.groups.gpio = {};
-        users.${homeUser} = {
-              password = "${password}";
+        users.cupglassdev = {
+              password = "admin";
               isNormalUser = true;
               extraGroups = ["wheel"];
         };
