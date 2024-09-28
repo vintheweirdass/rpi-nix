@@ -4,8 +4,6 @@ on:
       version:
         description: 'Version'     
         required: true
-      tags:
-        description: 'Test scenario tags'
 jobs:
   build:
     permissions:
@@ -14,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: cupglassDEV/idholidays
+          repository: cupglassDEV/rpi-nix
           ref: 'master'
           token: ${{ secrets.GITHUB_TOKEN }}
       - uses: denoland/setup-deno@v1.5.1
