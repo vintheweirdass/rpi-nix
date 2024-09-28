@@ -21,36 +21,36 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Pull everything
-      - run: git pull
+        run: git pull
       - name: Install needed deps
-      - run: sudo apt-get install zstd
+        run: sudo apt-get install zstd
       - name: Go to distribution folder
-      - run: |
+        run: |
           cd dist
           mkdir ${{  inputs.version }}
           cd ${{ inputs.version }}
       - name: Make temp-flake (temporail flake) inside dist folder
-      - run: find ../../ -type f -name "*.nix" -exec cp {} ./ \
+        run: find ../../ -type f -name "*.nix" -exec cp {} ./ \
       - name: Build desktop
-      - run: |
+        run: |
           nix build .#packages.aarch64-linux.sdcard
           nix flake check
           deno run ../../build/moveFlakeResult.js ${{ inputs.version }}-desktop
       - name: Build desktop+remoteable
-      - run: |
+        run: |
           nix build .#packages.aarch64-linux-remoteable.sdcard
           nix flake check
           deno run ../../build/moveFlakeResult.js ${{ github.event.inputs.version }}-desktop-remoteable
       - name: Delete temp-flake
-      - run: |
+        run: |
           find ./ -type f -name "*.nix" -exec rm -f {} \
           find ./ -type f -name "*.lock" -exec rm -f {} \
       - name: Compress to Facebook Zstandart
-      - run: find ./ -type f -name "*.img" -exec zstd {} \
+        run: find ./ -type f -name "*.img" -exec zstd {} \
       - name: Delete Iso, but keep the Zstd compressed Iso
-      - run: find ./ -type f -name "*.img" -exec rm -f {} \
+        run: find ./ -type f -name "*.img" -exec rm -f {} \
       - name: Commit
-      - run: |
+        run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git commit -am "Build image for version ${{ inputs.version }}"
