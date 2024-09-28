@@ -42,27 +42,27 @@
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
-          "./apps.conf.nix"
-          "./extra.conf.nix"
           self.nixosModules.system
           self.nixosModules.users
           self.nixosModules.programs
           self.nixosModules.services
+          "./apps.conf.nix"
+          "./extra.conf.nix"
         ];
       };
     };
-    packages.aarch64-linux-ssh = {
+    packages.aarch64-linux-remoteable = {
       sdcard = nixos-generators.nixosGenerate {
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
-          "./apps.conf.nix"
-          "./extra.conf.nix"
-          "./ssh.conf.nix"
           self.nixosModules.system
           self.nixosModules.users
           self.nixosModules.programs
           self.nixosModules.services
+          "./remoteable.conf.nix"
+          "./apps.remoteable.conf.nix"
+          "./extra.conf.nix"
         ];
       };
     };
