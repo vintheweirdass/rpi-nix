@@ -6,9 +6,10 @@ on:
         required: true
 jobs:
   build:
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-    runs-on: ubuntu-latest
+    #ok
     steps: 
       - if: ${{inputs.version}} == ''
         name: Check if manual
