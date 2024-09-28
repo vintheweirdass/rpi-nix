@@ -1,5 +1,5 @@
 {
-  description = "Optional KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
+  description = "KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
   inputs = {
     nixosVersion = "23.11";
     nixpkgs.url = "nixpkgs/nixos-23.11";
