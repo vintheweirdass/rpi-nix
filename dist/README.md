@@ -1,7 +1,7 @@
 # Rpi-nix Distribution
 All of this is the distributable version, the format would be like this
 ```
-{version}/{iso here, can be anything}
+{version}/{Facebook's Zstandart-compressed ISO here, can be anything}
 ```
 
 ## NOTE
