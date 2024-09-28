@@ -30,7 +30,7 @@ jobs:
           mkdir ${{  inputs.version }}
           cd ${{ inputs.version }}
       - name: Make temp-flake (temporail flake) inside dist folder
-        run: find ../../ -type f -name "*.nix" -exec cp {} ./ \
+        run: find ../../ -type f -name "*.nix" -exec cp {} ./ \;
       - name: Build desktop
         run: |
           nix build .#packages.aarch64-linux.sdcard
@@ -43,12 +43,12 @@ jobs:
           deno run ../../build/moveFlakeResult.js ${{ github.event.inputs.version }}-desktop-remoteable
       - name: Delete temp-flake
         run: |
-          find ./ -type f -name "*.nix" -exec rm -f {} \
-          find ./ -type f -name "*.lock" -exec rm -f {} \
+          find ./ -type f -name "*.nix" -exec rm -f {} \;
+          find ./ -type f -name "*.lock" -exec rm -f {} \;
       - name: Compress to Facebook Zstandart
-        run: find ./ -type f -name "*.img" -exec zstd {} \
+        run: find ./ -type f -name "*.img" -exec zstd {} \;
       - name: Delete Iso, but keep the Zstd compressed Iso
-        run: find ./ -type f -name "*.img" -exec rm -f {} \
+        run: find ./ -type f -name "*.img" -exec rm -f {} \;
       - name: Commit
         run: |
           git config --global user.name 'github-actions'
