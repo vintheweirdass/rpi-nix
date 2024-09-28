@@ -29,7 +29,7 @@ jobs:
           cd dist
           mkdir ${{  inputs.version }}
           cd ${{ inputs.version }}
-          find ../../ -type f -name "*.nix" -exec cp {} ./ \;
+          find ../../ -type f -name "*.nix" -execdir cp {} ./ \;
           
           nix build .#packages.aarch64-linux.sdcard
           nix flake check
@@ -37,13 +37,13 @@ jobs:
           
           nix build .#packages.aarch64-linux-remoteable.sdcard
           nix flake check
-          deno run ../../build/moveFlakeResult.js ${{ github.event.inputs.version }}-desktop-remoteable
+          deno run ../../build/moveFlakeResult.js ${{ inputs.version }}-desktop-remoteable
           
-          find ./ -type f -name "*.nix" -exec rm -f {} \;
-          find ./ -type f -name "*.lock" -exec rm -f {} \;
+          find ./ -type f -name "*.nix" -execdir rm -f {} \;
+          find ./ -type f -name "*.lock" -execdir rm -f {} \;
           
-          find ./ -type f -name "*.img" -exec zstd {} \;
-          find ./ -type f -name "*.img" -exec rm -f {} \;
+          find ./ -type f -name "*.img" -execdir zstd {} \;
+          find ./ -type f -name "*.img" -execdir rm -f {} \;
           
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
