@@ -10,5 +10,6 @@
         pkgs.devenv
         pkgs.flox
         pkgs.wayvnc
+        pkgs.openssh
   ];
 }
