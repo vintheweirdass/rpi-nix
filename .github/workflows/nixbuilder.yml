@@ -1,3 +1,4 @@
+name: Cupglassdev Nix Builder
 on:
   workflow_dispatch:
     inputs:
@@ -24,26 +25,28 @@ jobs:
         run: git pull
       - name: Install needed deps
         run: sudo apt-get install zstd
-      - name: Start building
+      - name: Export 
+        run: deno run ./build/exportThis.js
+      - name: Refresh bash
+        run: source ~/.bash_rc
+      - name: Run mkVersionDir.js from ./build folder (Make version folder from ./dist)
+        run: run mkVersionDir ${{ inputs.version }}
+      - name: Build aarch64-linux
         run: |
-          mkdir "$HOME"/dist/${{inputs.version}}
-          cd "$HOME"/dist/${{inputs.version}}
-          find ../../ -type f -name "*.nix" -execdir rsync {} "$HOME"/dist/${{inputs.version}} \;
-          
           nix build .#packages.aarch64-linux.sdcard
           nix flake check
-          deno run ../../build/moveFlakeResult.js ${{ inputs.version }}-desktop
-          
+      - name: (Wave 1) Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
+        run: run moveFlakeResult ${{ inputs.version }} desktop
+      - name: Build aarch64-linux.remoteable (VNC + SSH)
+        run: |
           nix build .#packages.aarch64-linux-remoteable.sdcard
           nix flake check
-          deno run ../../build/moveFlakeResult.js ${{ inputs.version }}-desktop-remoteable
-          
-          find ./ -type f -name "*.nix" -execdir rm -f {} \;
-          find ./ -type f -name "*.lock" -execdir rm -f {} \;
-          
-          find ./ -type f -name "*.img" -execdir zstd {} \;
-          find ./ -type f -name "*.img" -execdir rm -f {} \;
-          
+      - name: (Wave 2) Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
+        run: run moveFlakeResult ${{ inputs.version }} desktop-remoteable
+      - name: Run compressVersion.js from ./build folder (Compress disk image to Facebook Zstandart)
+        run: run compressVersion
+      - name: Commit
+        run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git commit -am "Build image for version ${{ inputs.version }}"
