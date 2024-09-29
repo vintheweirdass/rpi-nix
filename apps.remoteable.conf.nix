@@ -1,15 +1,22 @@
 { config, lib, pkgs, ... }:
-{
-  environment.systemPackages = with pkgs; [
+let
+  rev = "master"; # 'rev' could be a git rev, to pin the overlay.
+  url = "https://github.com/nix-community/nixpkgs-wayland/archive/${rev}.tar.gz";
+  waylandOverlay = (import "${builtins.fetchTarball url}/overlay.nix");
+in
+  {
+    nixpkgs.overlays = [ waylandOverlay ];
+    environment.systemPackages = with pkgs; [
+        wayvnc
         #so u can run that shit (vcgencmd)
-        pkgs.libraspberrypi
-        pkgs.i2c-tools
-        pkgs.neovim
-        pkgs.deno
-        pkgs.zsh
-        pkgs.devenv
-        pkgs.flox
-        pkgs.wayvnc
-        pkgs.openssh
-  ];
-}
+        libraspberrypi
+        i2c-tools
+        neovim
+        deno
+        zsh
+        devenv
+        flox
+        wayvnc
+        openssh
+    ];
+  }
