@@ -20,6 +20,3 @@ await copyFile(sympth, join(cwd, `${name}-releasedate: ${Temporal.Now.plainDateT
       dateStyle: 'medium',
       timeStyle: 'short'
     })}.img`))
-// clean nix-store, FUCK
-await exec('sudo nix-store --gc --print-roots')  
-await exec('rm -rf /tmp/*')
