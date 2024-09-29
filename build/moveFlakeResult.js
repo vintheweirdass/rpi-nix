@@ -10,7 +10,8 @@ const exec = promisify(_exec)
 import {copyFile, readlink } from "node:fs/promises";
 import {join, isAbsolute} from "node:path";
 function alwaysAbs(pth:string, cwd:string){
-    return isAbsolute(pth)?pth:join(pth, cwd)
+    // my bad
+    return isAbsolute(pth)?pth:join(cwd, pth)
 }
 const cwd = Deno.cwd()
 if (Deno.args.length!==1) throw new Error("Arg must be only ONE, not two or three... just ONE");
