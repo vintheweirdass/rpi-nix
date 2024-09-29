@@ -22,7 +22,7 @@ Q: Why (for the next update) you want to use the Raspberry pi nixos-community, i
 
 A: https://github.com/nix-community/raspberry-pi-nix To make it upstream with the kernel, just that simple. But because of some consideration i would need to see
 1. UBOOT fails to work with some newer pi, like RPi4B with the latest revision model, and the RPi5
-<br>Some other finds that the RPi4b works, but other people (like me) finds the RPi4b dosent work for UBOOT
+<br>Some other finds that the RPi4b works, but other people (like me) finds the RPi4b dosent work with UBOOT
 
 2. Racing with always-updated startup files
 <br>Ex. EEPROM, Device tree, and .elf file that is closed source (related to the first question)<br>I mean, the files are always provided & updated by that repository, but the implementation sadly ALWAYS changes every update
