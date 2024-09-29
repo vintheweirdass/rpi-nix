@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 {
+  hardware.enableRedistributableFirmware = false;
   networking.firewall.enable = false;
   # TODO: make a separate firewall version and the non-firewall version | networking.firewall.allowedTCPPorts = [ 22 80 443 5900 ];
   nixpkgs.config.allowUnfree = true;
@@ -14,9 +15,16 @@
       options = ["noatime"];
     };
   };
-
+  time.timeZone = "Asia/Jakarta";
   networking = {
     networkmanager.enable = true;
     hostName = "rpinix";
+  };
+  # can be deadly, whatchout
+  security = {
+    sudo = {
+      enable = true;
+      wheelNeedsPassword = false;
+    };
   };
 }
