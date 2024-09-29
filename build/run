@@ -1,1 +1,1 @@
-deno run run.js
+deno run ./build/run.js
