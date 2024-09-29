@@ -43,8 +43,8 @@
           self.nixosModules.users
           self.nixosModules.programs
           self.nixosModules.services
-          "./apps.conf.nix"
-          "./extra.conf.nix"
+          ./apps.conf.nix
+          ./extra.conf.nix
         ];
       };
     };
@@ -57,9 +57,9 @@
           self.nixosModules.users
           self.nixosModules.programs
           self.nixosModules.services
-          "./remoteable.conf.nix"
-          "./apps.remoteable.conf.nix"
-          "./extra.conf.nix"
+          ./remoteable.conf.nix
+          ./apps.remoteable.conf.nix
+          ./extra.conf.nix
         ];
       };
     };
