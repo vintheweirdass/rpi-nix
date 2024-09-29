@@ -50,7 +50,7 @@
           filter = "*-rpi-4-*.dtb";
         }
         # stupid, only works on compute model
-        boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
+        # boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
         # if you switched to gnome, this prob works. not really tied to hardware tho
         pulseaudio.enable = true;
       }
