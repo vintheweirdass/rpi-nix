@@ -31,7 +31,8 @@
       };
       services.xserver.enable = true;
       services.displayManager.sddm.enable = true;
-      services.desktopManager.plasma6.enable = true;
+      # TODO: Kalo ke 24.01 apus 'xserver' nya, tapi yang diatas comment ini gausah diapus
+      services.xserver.desktopManager.plasma6.enable = true;
       programs.sway.enable = true;
     };  
     packages.aarch64-linux = {
