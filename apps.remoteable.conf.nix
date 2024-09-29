@@ -16,7 +16,6 @@ in
         zsh
         devenv
         flox
-        wayvnc
         openssh
     ];
   }
