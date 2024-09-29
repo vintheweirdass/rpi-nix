@@ -1,1 +1,1 @@
-deno run -A ./build/run.js
+deno run -A ./build/run.js "$@"
