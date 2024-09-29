@@ -1,7 +1,7 @@
 {
   description = "KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-24.01";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,7 +16,7 @@
           "profiles/base.nix"
         ];
 
-        system.stateVersion = "23.11";
+        system.stateVersion = "24.01";
       };  
       users = {
         #the nix.dev manual is outdated
@@ -32,7 +32,7 @@
       services.xserver.enable = true;
       services.displayManager.sddm.enable = true;
       # TODO: Kalo ke 24.01 apus 'xserver' nya, tapi yang diatas comment ini gausah diapus
-      services.xserver.desktopManager.plasma6.enable = true;
+      services.desktopManager.plasma6.enable = true;
       programs.sway.enable = true;
     };  
     packages.aarch64-linux = {
@@ -46,6 +46,7 @@
           self.nixosModules.services
           ./apps.conf.nix
           ./extra.conf.nix
+          ./wayland.conf.nix
         ];
       };
     };
@@ -61,6 +62,7 @@
           ./remoteable.conf.nix
           ./apps.remoteable.conf.nix
           ./extra.conf.nix
+          ./wayland.conf.nix
         ];
       };
     };
