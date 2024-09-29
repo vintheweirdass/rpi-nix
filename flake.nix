@@ -30,6 +30,7 @@
         #users.groups.gpio = {};
         users.cupglassdev = {
               password = "admin";
+              shell = pkgs.bash;
               description = "change this, ok?";
               isNormalUser = true;
               extraGroups = ["wheel" "networkmanager"];
