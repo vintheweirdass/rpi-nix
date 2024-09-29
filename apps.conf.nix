@@ -19,6 +19,7 @@ in
         wayvnc
         #so u can run that shit (vcgencmd)
         libraspberrypi
+        raspberrypi-eeprom
         i2c-tools
         neovim
         deno
