@@ -25,7 +25,7 @@ A: https://github.com/nix-community/raspberry-pi-nix To make it upstream with th
 <br>Some other finds that the RPi4b works, but other people (like me) finds the RPi4b dosent work for UBOOT
 
 2. Racing with always-updated startup files
-<br>Ex. EEPROM, Device tree, and .elf file that is closed source (related to the first question)<br>I mean, the files are always provided by that repository, but the implementation sadly ALWAYS changes every update
+<br>Ex. EEPROM, Device tree, and .elf file that is closed source (related to the first question)<br>I mean, the files are always provided & updated by that repository, but the implementation sadly ALWAYS changes every update
 
 So.. maybe later. But not now
 
