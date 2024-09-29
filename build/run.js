@@ -9,7 +9,7 @@ import {join} from "node:path"
 const exec = promisify(_exec)
 async function r(){
 const path = join(Deno.cwd(), "build" , Deno.args[0])
-const p = await exec(`deno run -A ${path}`)
+const p = await exec(`deno run -A ${path}.js`)
 const err = p.stderr
 // i have no idea, the IDE says that the stderr is only string
 // but bcs it is dosent well documented, i might do this
