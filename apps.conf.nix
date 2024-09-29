@@ -4,7 +4,7 @@ let
   waylandOverlay = (import "${builtins.fetchTarball {
     url = "https://github.com/nix-community/nixpkgs-wayland/archive/${rev}.tar.gz"; 
     sha256 = "";
-  };}/overlay.nix");
+  }}/overlay.nix");
 in
   {
     nixpkgs.overlays = [ waylandOverlay ];
