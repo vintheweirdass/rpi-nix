@@ -16,7 +16,7 @@
         disabledModules = [
           "profiles/base.nix"
         ];
-
+        
         system.stateVersion = "23.11";
       };  
       users = {
@@ -55,32 +55,14 @@
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
+          ./extra.conf.nix
+          ./apps.conf.nix
           #collection of shits
           self.nixosModules.system
           self.nixosModules.users
           self.nixosModules.programs
           self.nixosModules.services
           self.nixosModules.hardware
-          ./apps.conf.nix
-          ./extra.conf.nix
-        ];
-      };
-    };
-    # Remoteable variant (VNC + SSH)
-    packages.aarch64-linux-remoteable = {
-      sdcard = nixos-generators.nixosGenerate {
-        system = "aarch64-linux";
-        format = "sd-aarch64";
-        modules = [
-          #another collection of shits
-          self.nixosModules.system
-          self.nixosModules.users
-          self.nixosModules.programs
-          self.nixosModules.services
-          self.nixosModules.hardware
-          ./remoteable.conf.nix
-          ./apps.remoteable.conf.nix
-          ./extra.conf.nix
         ];
       };
     };
