@@ -34,6 +34,7 @@
       # TODO: Kalo ke 24.01 apus 'xserver' nya, tapi yang diatas comment ini gausah diapus
       services.desktopManager.plasma6.enable = true;
       programs.sway.enable = true;
+      hardware.raspberry-pi."4".fkms-3d.enable = true;
     };  
     packages.aarch64-linux = {
       sdcard = nixos-generators.nixosGenerate {
@@ -44,6 +45,7 @@
           self.nixosModules.users
           self.nixosModules.programs
           self.nixosModules.services
+          self.nixosModules.hardware
           ./apps.conf.nix
           ./extra.conf.nix
         ];
@@ -58,6 +60,7 @@
           self.nixosModules.users
           self.nixosModules.programs
           self.nixosModules.services
+          self.nixosModules.hardware
           ./remoteable.conf.nix
           ./apps.remoteable.conf.nix
           ./extra.conf.nix
