@@ -8,16 +8,15 @@ import {exec as _exec} from "node:child_process"
 const exec = promisify(_exec)
 
 import {copyFile, readlink } from "node:fs/promises";
-import {join, isAbsolute} from "node:path";
-function alwaysAbs(pth:string, cwd:string){
-    // my bad
-    return isAbsolute(pth)?pth:join(cwd, pth)
-}
+import {join} from "node:path";
+
 const cwd = Deno.cwd()
-if (Deno.args.length!==1) throw new Error("Arg must be only ONE, not two or three... just ONE");
-const name = Deno.args[0]
-const sympth = alwaysAbs(await readlink(join(cwd, "result")), cwd)
-await copyFile(sympth, join(cwd, `${name}-releasedate: ${Temporal.Now.plainDateTimeISO().toZonedDateTime("Asia/Jakarta").toLocaleString("en-US",{
+const version = Deno.args[0]
+const name = Deno.args[1]
+const sympth = await readlink(join(cwd, "result"))
+await copyFile(sympth, join(cwd,"dist", version, `${version}-${name}-releasedate: ${Temporal.Now.plainDateTimeISO().toZonedDateTime("Asia/Jakarta").toLocaleString("en-US",{
       dateStyle: 'medium',
       timeStyle: 'short'
     })}.img`))
+// clean nix-store, FUCK
+await exec('sudo nix-store --gc --print-roots')
