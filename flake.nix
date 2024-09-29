@@ -19,6 +19,10 @@
         
         system.stateVersion = "23.11";
       };  
+      networking = {
+        networkmanager.enable = true;
+        hostName = "rpinix";
+      };
       users = {
         #the nix.dev manual is outdated
         #who the hell, who was using a fricking rpi 1??
@@ -26,8 +30,9 @@
         #users.groups.gpio = {};
         users.cupglassdev = {
               password = "admin";
+              description = "change this, ok?";
               isNormalUser = true;
-              extraGroups = ["wheel"];
+              extraGroups = ["wheel" "networkmanager"];
         };
       };
       services.xserver.enable = true;
@@ -63,6 +68,7 @@
           self.nixosModules.programs
           self.nixosModules.services
           self.nixosModules.hardware
+          self.nixosModules.networking
         ];
       };
     };
