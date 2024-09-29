@@ -8,7 +8,13 @@ let
   }}/overlay.nix");
 in
   {
-    nixpkgs.overlays = [ waylandOverlay ];
+    nixpkgs.overlays = [ waylandOverlay;
+      # Workaround: https://github.com/NixOS/nixpkgs/issues/154163
+      # modprobe: FATAL: Module sun4i-drm not found in directory
+      (final: super: {
+        makeModulesClosure = x:
+          super.makeModulesClosure (x // {allowMissing = true;});
+      }); ];
     environment.systemPackages = with pkgs; [
         wayvnc
         #so u can run that shit (vcgencmd)
