@@ -1,4 +1,5 @@
 {
+  # NOTE: the extra.conf.nix file is important, or else your pi wont boot
   description = "KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.11";
@@ -31,17 +32,30 @@
       };
       services.xserver.enable = true;
       services.xserver.displayManager.sddm.enable = true;
-      # TODO: Kalo ke 24.01 apus 'xserver' nya
+      # TODO: delete that fucking 'xserver' on 24.05 and onwards
       services.xserver.desktopManager.plasma6.enable = true;
       programs.sway.enable = true;
-      hardware.raspberry-pi."4".fkms-3d.enable = true;
-      hardware.pulseaudio.enable = true;
+      hardware = {
+        # not for now
+        # raspberry-pi."4".fkms-3d.enable = true;
+        # already used the device tree
+        deviceTree = {
+          enable = true;
+          filter = "*-rpi-4-*.dtb";
+        }
+        # stupid, only works on compute model
+        boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
+        # if you switched to gnome, this prob works. not really tied to hardware tho
+        pulseaudio.enable = true;
+      }
     };  
+    # Normal desktop variant
     packages.aarch64-linux = {
       sdcard = nixos-generators.nixosGenerate {
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
+          #collection of shits
           self.nixosModules.system
           self.nixosModules.users
           self.nixosModules.programs
@@ -52,11 +66,13 @@
         ];
       };
     };
+    # Remoteable variant (VNC + SSH)
     packages.aarch64-linux-remoteable = {
       sdcard = nixos-generators.nixosGenerate {
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
+          #another collection of shits
           self.nixosModules.system
           self.nixosModules.users
           self.nixosModules.programs
