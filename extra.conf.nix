@@ -16,10 +16,6 @@
     };
   };
   time.timeZone = "Asia/Jakarta";
-  networking = {
-    networkmanager.enable = true;
-    hostName = "rpinix";
-  };
   # can be deadly, whatchout
   security = {
     sudo = {
