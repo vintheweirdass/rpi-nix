@@ -46,7 +46,6 @@
           self.nixosModules.services
           ./apps.conf.nix
           ./extra.conf.nix
-          ./wayland.conf.nix
         ];
       };
     };
@@ -62,7 +61,6 @@
           ./remoteable.conf.nix
           ./apps.remoteable.conf.nix
           ./extra.conf.nix
-          ./wayland.conf.nix
         ];
       };
     };
