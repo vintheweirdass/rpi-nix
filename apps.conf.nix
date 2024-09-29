@@ -3,7 +3,10 @@ let
   rev = "master"; # 'rev' could be a git rev, to pin the overlay.
   url = "https://github.com/nix-community/nixpkgs-wayland/archive/${rev}.tar.gz";
   sha256 = ""
-  waylandOverlay = (import "${builtins.fetchTarball url sha256}/overlay.nix");
+  waylandOverlay = (import "${builtins.fetchTarball {
+    url = "https://github.com/nix-community/nixpkgs-wayland/archive/${rev}.tar.gz"; 
+    sha256 = ""
+  }}/overlay.nix");
 in
   {
     nixpkgs.overlays = [ waylandOverlay ];
