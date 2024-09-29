@@ -7,4 +7,16 @@
   #no zfs please
   boot.supportedFilesystems.zfs = lib.mkForce false;
   sdImage.compressImage = false;
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "ext4";
+      options = ["noatime"];
+    };
+  };
+
+  networking = {
+    networkmanager.enable = true;
+    hostName = "rpinix";
+  };
 }
