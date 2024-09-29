@@ -25,8 +25,8 @@ jobs:
         run: git pull
       - name: Install needed deps
         run: sudo apt-get install zstd
-      - name: Recreate flake lock
-        run: nix flake lock --recreate-lock-file
+      - name: Update flake lock
+        run: nix flake update
       - name: Run mkVersionDir.js from ./build folder (Make version folder from ./dist)
         run: deno run -A ./build/mkVersionDir.js ${{ inputs.version }}
       - name: Build aarch64-linux
