@@ -44,7 +44,7 @@ jobs:
       - name: (Wave 2) Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
         run: run moveFlakeResult ${{ inputs.version }} desktop-remoteable
       - name: Run compressVersion.js from ./build folder (Compress disk image to Facebook Zstandart)
-        run: run compressVersion
+        run: run compressVersion ${{ inputs.version }}
       - name: Commit
         run: |
           git config --global user.name 'github-actions'
