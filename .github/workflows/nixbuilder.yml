@@ -25,24 +25,22 @@ jobs:
         run: git pull
       - name: Install needed deps
         run: sudo apt-get install zstd
-      - name: Make 'run' executable
-        run: sudo chmod +x ./build/run
       - name: Run mkVersionDir.js from ./build folder (Make version folder from ./dist)
-        run: ./build/run mkVersionDir ${{ inputs.version }}
+        run: deno run -A ./build/mkVersionDir.js ${{ inputs.version }}
       - name: Build aarch64-linux
         run: |
           nix build .#packages.aarch64-linux.sdcard
           nix flake check
       - name: (Wave 1) Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
-        run: ./build/run moveFlakeResult ${{ inputs.version }} desktop
+        run: deno run -A ./build/moveFlakeResult.js ${{ inputs.version }} desktop
       - name: Build aarch64-linux.remoteable (VNC + SSH)
         run: |
           nix build .#packages.aarch64-linux-remoteable.sdcard
           nix flake check
       - name: (Wave 2) Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
-        run: ./build/run moveFlakeResult ${{ inputs.version }} desktop-remoteable
+        run: deno run -A ./build/moveFlakeResult.js ${{ inputs.version }} desktop-remoteable
       - name: Run compressVersion.js from ./build folder (Compress disk image to Facebook Zstandart)
-        run: ./build/run compressVersion ${{ inputs.version }}
+        run: deno run -A ./build/compressVersion.js ${{ inputs.version }}
       - name: Commit
         run: |
           git config --global user.name 'github-actions'
