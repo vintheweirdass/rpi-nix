@@ -67,7 +67,7 @@
           #self.nixosModules.hardware
           self.nixosModules.system
           self.nixosModules.users
-          self.nixosModules.programs
+          #self.nixosModules.programs
           self.nixosModules.services
           #self.nixosModules.networking
         ];
