@@ -19,7 +19,10 @@
         
         system.stateVersion = "23.11";
       };  
-      networking.networkmanager.enable = true;
+      networking = {
+        networkmanager.enable = true;
+        hostName = "rpinix";
+      };
       users = {
         #the nix.dev manual is outdated
         #who the hell, who was using a fricking rpi 1??
