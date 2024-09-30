@@ -40,7 +40,7 @@
       services.xserver.displayManager.sddm.enable = true;
       # TODO: delete that fucking 'xserver' on 24.05 and onwards
       services.xserver.desktopManager.plasma6.enable = true;
-      programs.sway.enable = true;
+      # programs.sway.enable = true;
       #hardware = {
         # not for now
         # raspberry-pi."4".fkms-3d.enable = true;
