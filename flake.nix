@@ -41,7 +41,7 @@
       # TODO: delete that fucking 'xserver' on 24.05 and onwards
       services.xserver.desktopManager.plasma6.enable = true;
       programs.sway.enable = true;
-      hardware = {
+      #hardware = {
         # not for now
         # raspberry-pi."4".fkms-3d.enable = true;
         # the newer nix do not include this shit again, so i will stick to a package
@@ -50,8 +50,9 @@
         # boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
 
         # if you switched to gnome, this prob works. not really tied to hardware tho
-        pulseaudio.enable = true;
-      };
+        # pulseaudio.enable = true;
+        # IT DOSENT EXIST TOO??? bye gnome user, i think you will be deaf for now
+      #};
     };  
     # Normal desktop variant
     packages.aarch64-linux = {
@@ -63,7 +64,7 @@
           ./apps.conf.nix
           nixos-hardware.nixosModules.raspberry-pi-4
           #collection of shits
-          self.nixosModules.hardware
+          #self.nixosModules.hardware
           self.nixosModules.system
           self.nixosModules.users
           self.nixosModules.programs
