@@ -44,11 +44,8 @@
       hardware = {
         # not for now
         # raspberry-pi."4".fkms-3d.enable = true;
-        # already used the device tree
-        deviceTree = {
-          enable = true;
-          filter = "*-rpi-4-*.dtb";
-        }
+        # the newer nix do not include this shit again, so i will stick to a package
+
         # stupid, only works on compute model
         # boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
 
