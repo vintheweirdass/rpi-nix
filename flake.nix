@@ -1,15 +1,15 @@
 {
-  # NOTE: the extra.conf.nix file is important, or else your pi wont boot
   description = "KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixos-generators, ... }:
+  outputs = { self, nixpkgs, nixos-generators, nixos-hardware, ... }:
   {
     nixosModules = {
       system = {
@@ -64,6 +64,7 @@
         modules = [
           ./extra.conf.nix
           ./apps.conf.nix
+          nixos-hardware.nixosModules.raspberry-pi-4
           #collection of shits
           self.nixosModules.system
           self.nixosModules.users
