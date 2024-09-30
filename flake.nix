@@ -9,7 +9,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-generators, nixos-hardware, ... }:
+  outputs = { self, nixpkgs, nixos-generators, nixos-hardware, pkgs, ... }:
   {
     nixosModules = {
       system = {
@@ -30,7 +30,7 @@
         #users.groups.gpio = {};
         users.cupglassdev = {
               password = "admin";
-              shell = nixpkgs.zsh;
+              shell = pkgs.zsh;
               description = "change this, ok?";
               isNormalUser = true;
               extraGroups = ["wheel" "networkmanager"];
