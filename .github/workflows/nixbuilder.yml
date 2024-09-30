@@ -35,12 +35,6 @@ jobs:
           nix flake check
       - name: (Wave 1) Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
         run: deno run -A ./build/moveFlakeResult.js ${{ inputs.version }} desktop
-      - name: Build aarch64-linux.remoteable (VNC + SSH)
-        run: |
-          nix build .#packages.aarch64-linux-remoteable.sdcard
-          nix flake check
-      - name: (Wave 2) Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
-        run: deno run -A ./build/moveFlakeResult.js ${{ inputs.version }} desktop-remoteable
       - name: Run compressVersion.js from ./build folder (Compress disk image to Facebook Zstandart)
         run: deno run -A ./build/compressVersion.js ${{ inputs.version }}
       - name: Commit
