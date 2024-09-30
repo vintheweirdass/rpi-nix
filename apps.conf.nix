@@ -4,7 +4,7 @@ let
   waylandOverlay = (import "${builtins.fetchTarball {
     url = "https://github.com/nix-community/nixpkgs-wayland/archive/${rev}.tar.gz"; 
     #1. Set sha to "", then see the error, get the 'got' key, then done
-    sha256 = "09qlbz46fpkw3x3g03rp3sn9yk0mgghal6wlrmrmfqhqg700b8s8";
+    sha256 = "04pmpzd638qcckgrdjyaif0mhz2maa2glvxl2dsqkajcm3zdgyvx";
   }}/overlay.nix");
 in
   {
