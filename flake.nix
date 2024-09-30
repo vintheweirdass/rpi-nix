@@ -30,7 +30,7 @@
         #users.groups.gpio = {};
         users.cupglassdev = {
               password = "admin";
-              shell = pkgs.zsh;
+              shell = nixpkgs.zsh;
               description = "change this, ok?";
               isNormalUser = true;
               extraGroups = ["wheel" "networkmanager"];
