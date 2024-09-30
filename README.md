@@ -11,10 +11,12 @@ For the upcoming updates, this package is using BOTH of the Nixos' linux and Ras
 
 But for normal experience with my pi, its fine tbh
 ### FAQ
-Q: Why you disable the `hardware.enableRedistributableFirmware`
+Q: Why (back then) you disabled the `hardware.enableRedistributableFirmware`
 
 A: First of all, raspberry pi is mostly closed source. Their device tree needs to be updated EXACTLY at this repo https://github.com/raspberrypi/firmware.
 If you try to enable it, the kernel panics when they cant access some Broadcom closed-source programs like `brcmfmac` https://github.com/NixOS/nixpkgs/issues/122993#issuecomment-1221414184 (go to the bottom of the page)
+
+But the thing is, some program that i use requires the redistributeable firmware, to make the wireless work (wifi, bluetooth, etc)
 
 For developers, if you want to see how pi boots, check out this person from the Raspberry Pi Foundation (hes an actual Engineer) https://forums.raspberrypi.com/viewtopic.php?t=329799#p1974233
 
