@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 {
-  networking.firewall.enable = false;
+  networking = {
+    firewall.enable = false;
+    networkManager.enable = true;
+    hostName = "rpinix"
+  }
   # TODO: make a separate firewall version and the non-firewall version | networking.firewall.allowedTCPPorts = [ 22 80 443 5900 ];
   nixpkgs.config.allowUnfree = true;
   services.openssh.enable = true;
@@ -22,4 +26,17 @@
       wheelNeedsPassword = false;
     };
   };
+  users = {
+        #the nix.dev manual is outdated
+        #who the hell, who was using a fricking rpi 1??
+        #and the newer rpi4 dosent respect sysfs for gpio 
+        #users.groups.gpio = {};
+        users.cupglassdev = {
+              password = "admin";
+              shell = pkgs.zsh;
+              description = "change this, ok?";
+              isNormalUser = true;
+              extraGroups = ["wheel" "networkmanager"];
+        };
+      };
 }
