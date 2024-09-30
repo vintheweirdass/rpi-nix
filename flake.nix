@@ -9,7 +9,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos-generators, nixos-hardware, pkgs, ... }:
+  outputs = { self, nixpkgs, nixos-generators, nixos-hardware, ... }:
   {
     nixosModules = {
       system = {
@@ -23,19 +23,6 @@
       #networking = {
         #networkmanager.enable = true;
       #};
-      users = {
-        #the nix.dev manual is outdated
-        #who the hell, who was using a fricking rpi 1??
-        #and the newer rpi4 dosent respect sysfs for gpio 
-        #users.groups.gpio = {};
-        users.cupglassdev = {
-              password = "admin";
-              shell = pkgs.zsh;
-              description = "change this, ok?";
-              isNormalUser = true;
-              extraGroups = ["wheel" "networkmanager"];
-        };
-      };
       services.xserver.enable = true;
       services.xserver.displayManager.sddm.enable = true;
       # TODO: delete that fucking 'xserver' on 24.05 and onwards
@@ -66,7 +53,7 @@
           #collection of shits
           #self.nixosModules.hardware
           self.nixosModules.system
-          self.nixosModules.users
+          #self.nixosModules.users
           #self.nixosModules.programs
           self.nixosModules.services
           #self.nixosModules.networking
