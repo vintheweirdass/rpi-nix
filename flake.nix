@@ -19,9 +19,10 @@
         
         system.stateVersion = "23.11";
       };  
-      networking = {
-        networkmanager.enable = true;
-      };
+      # weird, the nix says that the networkmanager isnt exist
+      #networking = {
+        #networkmanager.enable = true;
+      #};
       users = {
         #the nix.dev manual is outdated
         #who the hell, who was using a fricking rpi 1??
@@ -67,7 +68,7 @@
           self.nixosModules.users
           self.nixosModules.programs
           self.nixosModules.services
-          self.nixosModules.networking
+          #self.nixosModules.networking
         ];
       };
     };
