@@ -21,7 +21,6 @@
       };  
       networking = {
         networkmanager.enable = true;
-        hostName = "rpinix";
       };
       users = {
         #the nix.dev manual is outdated
