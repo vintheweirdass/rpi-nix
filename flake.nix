@@ -51,7 +51,7 @@
 
         # if you switched to gnome, this prob works. not really tied to hardware tho
         pulseaudio.enable = true;
-      }
+      };
     };  
     # Normal desktop variant
     packages.aarch64-linux = {
@@ -63,11 +63,11 @@
           ./apps.conf.nix
           nixos-hardware.nixosModules.raspberry-pi-4
           #collection of shits
+          self.nixosModules.hardware
           self.nixosModules.system
           self.nixosModules.users
           self.nixosModules.programs
           self.nixosModules.services
-          self.nixosModules.hardware
           self.nixosModules.networking
         ];
       };
