@@ -44,11 +44,10 @@
     };  
     # Normal desktop variant
     packages.aarch64-linux = {
-        nixosConfigurations."rpinix" =
-        let system = "aarch64-linux";
+        sdcard = let system = "aarch64-linux";
         in nixpkgs.lib.nixosSystem {
         inherit system;
-      sdcard = nixos-generators.nixosGenerate {
+      nixos-generators.nixosGenerate {
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
