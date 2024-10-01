@@ -1,3 +1,4 @@
+<b> ./dist ONLY CONTAINS README = NOT READY FOR ANY USAGE</b>
 # Rpi-nix
 This is my Nixos build for my raspberry pi 4.
 
