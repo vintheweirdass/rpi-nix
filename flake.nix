@@ -44,10 +44,7 @@
     };  
     # Normal desktop variant
     packages.aarch64-linux = {
-        sdcard = let system = "aarch64-linux";
-        in nixpkgs.lib.nixosSystem {
-        inherit system;
-      nixos-generators.nixosGenerate {
+        sdcard = nixos-generators.nixosGenerate {
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
@@ -98,7 +95,6 @@
           #self.nixosModules.networking
         ];
         };
-      };
     };
   };
 }
