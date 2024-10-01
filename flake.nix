@@ -68,7 +68,7 @@
 
           # use it as an overlay
           nixpkgs.overlays = [ 
-          inputs.nixpkgs-wayland.overlay   
+          nixpkgs-wayland.overlay   
           (final: super: {
           makeModulesClosure = x:
           super.makeModulesClosure (x // {allowMissing = true;});
