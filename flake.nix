@@ -1,5 +1,5 @@
 {
-  description = "KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
+  description = "KDE Plasma 5 (Rollbacked bcs of too many bugs on the exclusive Nix version) + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -27,7 +27,7 @@
       services.xserver.enable = true;
       services.xserver.displayManager.sddm.enable = true;
       # TODO: delete that fucking 'xserver' on 24.05 and onwards
-      services.xserver.desktopManager.plasma6.enable = true;
+      services.xserver.desktopManager.plasma5.enable = true;
       # programs.sway.enable = true;
       #hardware = {
         # not for now
@@ -69,6 +69,10 @@
           makeModulesClosure = x:
           super.makeModulesClosure (x // {allowMissing = true;});
           }) ];
+          # kmaillll
+          environment.sessionVariables = {
+            NIX_PROFILES = "${pkgs.lib.concatStringsSep " " (pkgs.lib.reverseList config.environment.profiles)}";
+          };
           environment.systemPackages = with pkgs; [
         #inputs.nixpkgs-wayland.packages.${system}.waybar
         #wayvnc
