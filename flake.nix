@@ -3,13 +3,14 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixos-generators, nixos-hardware, ... }:
+  outputs = { self, nixpkgs, nixos-generators, nixos-hardware, nixpkgs-wayland, ... }:
   {
     nixosModules = {
       system = {
@@ -46,9 +47,47 @@
       sdcard = nixos-generators.nixosGenerate {
         system = "aarch64-linux";
         format = "sd-aarch64";
+        let system = "aarch64-linux";
+        in nixpkgs.lib.nixosSystem {
+        inherit system;
         modules = [
+          ({pkgs, config, ... }: {
+        config = {
+          nix.settings = {
+            # add binary caches
+            trusted-public-keys = [
+              "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+              "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+            ];
+            substituters = [
+              "https://cache.nixos.org"
+              "https://nixpkgs-wayland.cachix.org"
+            ];
+          };
+
+          # use it as an overlay
+          nixpkgs.overlays = [ 
+          inputs.nixpkgs-wayland.overlay   
+          (final: super: {
+          makeModulesClosure = x:
+          super.makeModulesClosure (x // {allowMissing = true;});
+          }) ];
+          environment.systemPackages = with pkgs; [
+        #inputs.nixpkgs-wayland.packages.${system}.waybar
+        #wayvnc
+        #so u can run that shit (vcgencmd)
+        libraspberrypi
+        raspberrypi-eeprom
+        i2c-tools
+        neovim
+        deno
+        zsh
+        devenv
+        flox
+        ];
+        };
+      })
           ./extra.conf.nix
-          ./apps.conf.nix
           nixos-hardware.nixosModules.raspberry-pi-4
           #collection of shits
           #self.nixosModules.hardware
@@ -58,6 +97,7 @@
           self.nixosModules.services
           #self.nixosModules.networking
         ];
+        };
       };
     };
   };
