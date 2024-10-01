@@ -47,6 +47,7 @@
       sdcard = nixos-generators.nixosGenerate {
         system = "aarch64-linux";
         format = "sd-aarch64";
+        nixosConfigurations."rpinix" =
         let system = "aarch64-linux";
         in nixpkgs.lib.nixosSystem {
         inherit system;
