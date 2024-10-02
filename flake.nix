@@ -1,5 +1,5 @@
 {
-  description = "KDE Plasma 5 (Rollbacked bcs of too many bugs on the exclusive Nix version) + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
+  description = "KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -27,7 +27,7 @@
       services.xserver.enable = true;
       services.xserver.displayManager.sddm.enable = true;
       # TODO: delete that fucking 'xserver' on 24.05 and onwards
-      services.desktopManager.plasma5.enable = true;
+      services.desktopManager.plasma6.enable = true;
       # programs.sway.enable = true;
       #hardware = {
         # not for now
