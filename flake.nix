@@ -50,6 +50,7 @@
         system = "aarch64-linux";
         format = "sd-aarch64";
         modules = [
+          ./extra.conf.nix
           ({pkgs, config, ... }: {
         config = {
           nix.settings = {
@@ -90,7 +91,6 @@
         ];
         };
       })
-          ./extra.conf.nix
           nixos-hardware.nixosModules.raspberry-pi-4
           #collection of shits
           #self.nixosModules.hardware
