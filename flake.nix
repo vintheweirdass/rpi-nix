@@ -29,7 +29,7 @@
         displayManager.sddm.enable = true;
       # TODO: delete that fucking 'xserver' on 24.05 and onwards
         desktopManager.plasma6.enable = true;
-      }
+      };
       # programs.sway.enable = true;
       #hardware = {
         # not for now
