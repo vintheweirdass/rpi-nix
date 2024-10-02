@@ -1,7 +1,7 @@
 {
   description = "KDE Plasma 6 + Programming language tools + RPi4. MADE BY CUPGLASSDEV";
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-24.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixos-generators = {
@@ -18,7 +18,7 @@
           "profiles/base.nix"
         ];
         
-        system.stateVersion = "23.11";
+        system.stateVersion = "24.05";
       };  
       # weird, the nix says that the networkmanager isnt exist
       #networking = {
