@@ -27,7 +27,7 @@
       services.xserver.enable = true;
       services.xserver.displayManager.sddm.enable = true;
       # TODO: delete that fucking 'xserver' on 24.05 and onwards
-      services.xserver.desktopManager.plasma5.enable = true;
+      services.desktopManager.plasma5.enable = true;
       # programs.sway.enable = true;
       #hardware = {
         # not for now
