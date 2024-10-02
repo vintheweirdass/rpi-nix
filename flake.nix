@@ -6,7 +6,7 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
-      inputs.nixos-generators.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
