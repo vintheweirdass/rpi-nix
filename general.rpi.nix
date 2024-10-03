@@ -42,7 +42,9 @@
           # nikocado avocado moment
           fsType = "fat32";
           device = "/dev/disk/by-label/${initial.evaluation.config.sdImage.firmwarePartitionName}";
-          options = [ "ro" ];
+          # not gud for nix and the rpi itself, every time it rebuilds, some package will take the boot partition to edit
+          # the config.txt
+          # options = [ "ro" ];
           depends = [ "/" ];
         }
         };
