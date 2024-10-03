@@ -23,7 +23,10 @@
 
         # whos the raspberry pi nixos-specific maintainer at this point
         #lib.mkForce false;
-        boot.loader.generic-extlinux-compatible.enable = true;
+        boot = {
+          loader.generic-extlinux-compatible.enable = true;
+          kernelParams = [ "console=serial0,115200n8" "console=tty1" ];
+        }
         time.timeZone = "Asia/Jakarta";
         system = {
           disabledModules = [
