@@ -56,13 +56,22 @@
         };
       hardware = {
         # not for now
-        raspberry-pi."4".fkms-3d.enable = true;
-
+        raspberry-pi."4" = {
+          fkms-3d.enable = true;
+          # yes, enabled by default since it dosent have any multiple functions to these pins
+          i2c1.enable = true
+          # consumes too much power
+          leds.act.enable = true;
+          audio.enable = true;
+          apply-overlays-dtmerge.enable = true;
+          # ze bluetooth dewise is ready to paer
+          bluetooth.enable = true
+        };
         # stupid, only works on compute model
         # boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
 
         #if you switched to gnome, this prob works. not really tied to hardware tho
-        pulseaudio.enable = true;
+        #pulseaudio.enable = true;
       };
       services = {
         xserver.enable = true;
