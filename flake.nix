@@ -28,7 +28,7 @@
 
         # whos the raspberry pi nixos-specific maintainer at this point
         #lib.mkForce false;
-        boot.loader.generic-extlinux-compatible.enable = true
+        boot.loader.generic-extlinux-compatible.enable = true;
         time.timeZone = "Asia/Jakarta";
         system = {
           disabledModules = [
