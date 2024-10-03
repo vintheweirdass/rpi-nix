@@ -12,6 +12,7 @@
     nixosConfigurations.rpi-nix = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       modules = [
+        nixos-hardware.nixosModules.raspberry-pi-4
         "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix"
         # you need this, right?
         ./idgaf-about-nix-experimental-commands.rpi.nix
