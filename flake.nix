@@ -44,7 +44,7 @@
           options = ["noatime"];
         };
         "/boot" = {
-          # nikocado avocado momment
+          # nikocado avocado moment
           fsType = "fat32";
           device = "/dev/disk/by-label/${initial.evaluation.config.sdImage.firmwarePartitionName}";
           options = [ "ro" ];
