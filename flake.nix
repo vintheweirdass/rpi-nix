@@ -4,54 +4,88 @@
     nixpkgs.url = "nixpkgs/nixos-24.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixos-generators, nixos-hardware, nixpkgs-wayland, ... }:
+  outputs = { self, nixpkgs, nixos-hardware, nixpkgs-wayland, ... }:
   {
-    nixosModules = {
-      system = {
-        disabledModules = [
-          "profiles/base.nix"
-        ];
-        
-        system.stateVersion = "24.05";
-      };  
-      # weird, the nix says that the networkmanager isnt exist
-      #networking = {
-        #networkmanager.enable = true;
-      #};
-      services = {
-        xserver.enable = true;
-        displayManager.sddm.enable = true;
-      # TODO: delete that fucking 'xserver' on 24.05 and onwards
-        desktopManager.plasma6.enable = true;
-      };
-      # programs.sway.enable = true;
-      #hardware = {
+    nixosConfigurations.rpi-nix = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules = [
+        "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64-installer.nix"
+        # you need this, right?
+        ./idgaf-about-nix-experimental-commands.rpi.nix
+
+        # fuck uboot, thats the reason why you need to fork a fucking rpi linux fork, and its OPEN SOURCE FOR THAT SPECIFIC RPI DISTRO
+        # and now you, maintainers said "we dont want to repeat the problem from the previous rpi" (4b, 3b, and the earlier ones)
+        # and still defend to do a fucking plain linux
+        # u dumbass need to test it out, not just commenting out, then closing the issue without an hassle
+        # (no, im not talking about the stale bot, its litteraly the maintainer itself who closes so many raspberry pi issues on their official github
+        # and the issue still ongoing, not solved)
+
+        # and untill now im still suffering from this specific issue https://github.com/NixOS/nixpkgs/issues/173948
+        # and this shit https://github.com/NixOS/nixpkgs/issues/173948#issuecomment-1718069205 for the next update
+
+        # whos the raspberry pi nixos-specific maintainer at this point
+        #lib.mkForce false;
+        boot.loader.generic-extlinux-compatible.enable = true
+        time.timeZone = "Asia/Jakarta";
+        system = {
+          disabledModules = [
+            "profiles/base.nix"
+          ];
+           system.stateVersion = "24.05"
+        }
+        fileSystems = {
+        "/" = {
+          fsType = "ext4";
+          device = "/dev/disk/by-uuid/${initial.evaluation.config.sdImage.rootPartitionUUID}";
+          # they dont have a built-in rtc, cuh
+          options = ["noatime"];
+        };
+        "/boot" = {
+          # nikocado avocado momment
+          fsType = "fat32";
+          device = "/dev/disk/by-label/${initial.evaluation.config.sdImage.firmwarePartitionName}";
+          options = [ "ro" ];
+          depends = [ "/" ];
+        }
+        security = {
+          sudo = {
+            enable = true;
+            wheelNeedsPassword = false;
+          };
+        }
+      hardware = {
         # not for now
-        # raspberry-pi."4".fkms-3d.enable = true;
-        # the newer nix do not include this shit again, so i will stick to a package
+        raspberry-pi."4".fkms-3d.enable = true;
 
         # stupid, only works on compute model
         # boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
 
-        # if you switched to gnome, this prob works. not really tied to hardware tho
-        # pulseaudio.enable = true;
-        # IT DOSENT EXIST TOO??? bye gnome user, i think you will be deaf for now
-      #};
-    };  
-    # Normal desktop variant
-    packages.aarch64-linux = {
-        sdcard = nixos-generators.nixosGenerate {
-        system = "aarch64-linux";
-        format = "sd-aarch64";
-        modules = [
-          ./extra.conf.nix
-          ({pkgs, config, ... }: {
+        #if you switched to gnome, this prob works. not really tied to hardware tho
+        pulseaudio.enable = true;
+      }
+      services = {
+        xserver.enable = true;
+        displayManager.sddm.enable = true;
+        # TODO: delete that fucking 'xserver' on 24.05 and onwards
+        desktopManager.plasma6.enable = true;
+      }
+       users = {
+        #the nix.dev manual is outdated
+        #who the hell, who was using a fricking rpi 1??
+        #and the newer rpi4 dosent respect sysfs for gpio 
+        #users.groups.gpio = {};
+        users.cupglassdev = {
+              password = "admin";
+              shell = pkgs.zsh;
+              description = "change this, ok?";
+              isNormalUser = true;
+              extraGroups = ["wheel" "networkmanager"];
+        };
+       }
+         ({pkgs, config, ... }: {
         config = {
           nix.settings = {
             # add binary caches
@@ -91,16 +125,7 @@
         ];
         };
       })
-          nixos-hardware.nixosModules.raspberry-pi-4
-          #collection of shits
-          #self.nixosModules.hardware
-          self.nixosModules.system
-          #self.nixosModules.users
-          #self.nixosModules.programs
-          self.nixosModules.services
-          #self.nixosModules.networking
-        ];
-        };
+      ];
     };
   };
 }
