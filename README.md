@@ -1,6 +1,5 @@
 
 <p>Rewrite is on the way, do not even build for any reason</p>
-<b> ./dist ONLY CONTAINS README = NOT READY FOR ANY USAGE</b>
 
 # Rpi-nix
 This is my Nixos build for my raspberry pi 4.
