@@ -22,7 +22,6 @@ jobs:
         with:
           extra_nix_config: |
            extra-platforms = aarch64-linux i686-linux
-      - run: nix-build
       - uses: denoland/setup-deno@v1.5.1
       - name: Pull everything no matter what
         run: git pull
@@ -32,7 +31,7 @@ jobs:
         run: deno run -A ./build/mkVersionDir.js ${{ inputs.version }}
         # fuck deprecation, embrace the os itself
       - name: Build the image itself
-        run:
+        run: |
             sudo nix flake update
             nix build '.#nixosConfigurations.rpi-nix.config.system.build.sdImage' --extra-experimental-features nix-command --extra-experimental-features flakes
       - name: Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
