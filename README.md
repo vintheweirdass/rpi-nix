@@ -1,5 +1,5 @@
 
-<p>It dosent successfuly build on github action, but weirdly it does on my raspberry pi</p>
+<p>It dosent successfully build on github action, but weirdly it does on my raspberry pi</p>
 <p>js bcs of 'git: folder is not a repo'</p>
 
 ```
