@@ -22,11 +22,9 @@ jobs:
         run: git pull
       - name: Install needed deps
         run: sudo apt-get install zstd
-        # fuck deprecation, embrace the os itself
-      - name: Update flake lock
-        run: nix flake lock --update-input nixpkgs
       - name: Run mkVersionDir.js from ./build folder (Make version folder from ./dist)
         run: deno run -A ./build/mkVersionDir.js ${{ inputs.version }}
+        # fuck deprecation, embrace the os itself
       - uses: pguyot/arm-runner-action@v2
         with:
           base_image: raspios_lite_arm64:latest
