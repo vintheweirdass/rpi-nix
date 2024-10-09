@@ -35,7 +35,7 @@ jobs:
         run: deno run -A ./build/mkVersionDir.js ${{ inputs.version }}
         # fuck deprecation, embrace the os itself
       - name: Build the image itself
-        run: sudo nix build '.#nixosConfigurations.rpi-nix.config.system.build.sdImage' --extra-experimental-features nix-command --extra-experimental-features flakes
+        run: nix build '.#nixosConfigurations.rpi-nix.config.system.build.sdImage' --extra-experimental-features nix-command --extra-experimental-features flakes
       - name: Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
         run: deno run -A ./build/moveFlakeResult.js ${{ inputs.version }} desktop
       - name: Run compressVersion.js from ./build folder (Compress disk image to Facebook Zstandart)
