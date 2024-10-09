@@ -32,8 +32,6 @@ jobs:
         run: git pull
       - name: Install needed deps
         run: sudo apt-get install zstd
-      - name: Run mkVersionDir.js from ./build folder (Make version folder from ./dist)
-        run: deno run -A ./build/mkVersionDir.js ${{ inputs.version }}
         # fuck deprecation, embrace the os itself
       - name: Build the image itself
         run: nix build '.#nixosConfigurations.rpi-nix.config.system.build.sdImage' --extra-experimental-features nix-command --extra-experimental-features flakes
