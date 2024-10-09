@@ -93,7 +93,8 @@
               shell = pkgs.zsh;
               description = "change this, ok?";
               isNormalUser = true;
-              extraGroups = ["wheel" "networkmanager"];
+              # add networkmanager if gnome
+              extraGroups = ["wheel"];
         };
        };
 }
