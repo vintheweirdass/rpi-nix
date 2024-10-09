@@ -18,7 +18,7 @@ jobs:
           ref: 'master'
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: (NUKE) delete temp
-        run: cd /tmp; rm -rf *; cd ..; git gc
+        run: cd /tmp; sudo rm -rf *; cd ..; git gc
       - name: (NUKE v2) delete soo many temps that idk what is this
         run: sudo rm -rf /usr/share/dotnet; sudo rm -rf /opt/ghc; sudo rm -rf "/usr/local/share/boost"; sudo rm -rf "$AGENT_TOOLSDIRECTORY"
       - uses: docker/setup-qemu-action@v3
