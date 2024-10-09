@@ -22,6 +22,7 @@ jobs:
         with:
           extra_nix_config: |
            extra-platforms = aarch64-linux i686-linux
+      - run: nix-build
       - uses: denoland/setup-deno@v1.5.1
       - name: Pull everything no matter what
         run: git pull
