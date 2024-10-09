@@ -11,6 +11,7 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: denoland/setup-deno@v1.5.1
       - name: Make a fake img file
         run: touch nixagain-${{ inputs.version }}.img
       - name: Make a symlink from the file
