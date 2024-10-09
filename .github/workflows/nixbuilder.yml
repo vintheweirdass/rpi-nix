@@ -17,16 +17,17 @@ jobs:
           repository: cupglassDEV/rpi-nix
           ref: 'master'
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: (NUKE) delete temp
-        run: export TMPDIR=/tmp; export SHIT="$PWD"; cd /tmp; sudo rm -rf *; cd ..
-      - name: (NUKE v2) delete soo many temps that idk what is this
-        run: sudo rm -rf /usr/share/dotnet; sudo rm -rf /opt/ghc; sudo rm -rf "/usr/local/share/boost"; sudo rm -rf "$AGENT_TOOLSDIRECTORY"; cd "$SHIT"
       - uses: docker/setup-qemu-action@v3
       - uses: cachix/install-nix-action@v27
         with:
           extra_nix_config: |
             extra-platforms = aarch64-linux i686-linux
       - uses: denoland/setup-deno@v1.5.1
+      - name: (NUKE) delete temp
+        run: export TMPDIR=/tmp; export SHIT="$PWD"; cd /tmp; sudo rm -rf *; cd ..
+      - name: (NUKE v2) delete soo many temps that idk what is this
+        run: sudo rm -rf /usr/share/dotnet; sudo rm -rf /opt/ghc; sudo rm -rf "/usr/local/share/boost"; sudo rm -rf "$AGENT_TOOLSDIRECTORY"; cd "$SHIT"
+      - uses: jlumbroso/free-disk-space@main
       - name: Pull everything no matter what
         run: git pull
       - name: Install needed deps
