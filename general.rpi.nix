@@ -38,7 +38,7 @@
         "/" = {
           fsType = "ext4";
           device = "/dev/disk/by-label/NIXOS_SD";
-          # they dont have a built-in rtc, cuh
+          # they dosent have a built-in rtc, cuh
           options = ["noatime"];
         };
         "/boot" = {
