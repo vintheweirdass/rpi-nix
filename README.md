@@ -1,6 +1,12 @@
 
 <p>It dosent successfuly build on github action, but weirdly it does on my raspberry pi</p>
-<p>js bcs of 'git is not a repo'</p>
+<p>js bcs of 'git: folder is not a repo'</p>
+
+```
++ sudo nix build .#nixosConfigurations.rpi-nix.config.system.build.sdImage --extra-experimental-features nix-command --extra-experimental-features flakes
+warning: Not a git repository. Use --no-index to compare two paths outside a working tree
+usage: git diff --no-index [<options>] <path> <path>
+```
 
 ![image info](./doc/cmdbuild.png)
 
