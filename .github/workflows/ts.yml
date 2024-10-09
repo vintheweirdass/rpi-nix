@@ -11,6 +11,11 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: cupglassDEV/rpi-nix
+          ref: 'master'
+          token: ${{ secrets.GITHUB_TOKEN }}
       - uses: denoland/setup-deno@v1.5.1
       - name: Make a fake img file
         run: touch nixagain-${{ inputs.version }}.img
