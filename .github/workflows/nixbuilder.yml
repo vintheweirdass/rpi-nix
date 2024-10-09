@@ -30,8 +30,7 @@ jobs:
           base_image: raspios_lite_arm64:latest
           commands: |
             sudo apt-get -y install nix-bin git
-            # hmm, the sudo mode seems to rewrite the socket
-            nix build .#nixosConfigurations.rpi-nix.config.system.build.sdImage --extra-experimental-features nix-command --extra-experimental-features flakes --use-remote-sudo
+            sudo nix build '.#nixosConfigurations.rpi-nix.config.system.build.sdImage' --extra-experimental-features nix-command --extra-experimental-features flakes
       - name: Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
         run: deno run -A ./build/moveFlakeResult.js ${{ inputs.version }} desktop
       - name: Run compressVersion.js from ./build folder (Compress disk image to Facebook Zstandart)
