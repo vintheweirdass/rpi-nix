@@ -14,7 +14,4 @@ const cwd = Deno.cwd()
 const version = Deno.args[0]
 const name = Deno.args[1]
 const sympth = await readlink(join(cwd, "result"))
-await copyFile(sympth, join(cwd,"dist", version, `${version}-${name}-releasedate: ${Temporal.Now.plainDateTimeISO().toZonedDateTime("Asia/Jakarta").toLocaleString("en-US",{
-      dateStyle: 'medium',
-      timeStyle: 'short'
-    })}.img`))
+await copyFile(sympth, join(cwd,"dist", version, `${version}-${name}.img`))
