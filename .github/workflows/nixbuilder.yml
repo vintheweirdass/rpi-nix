@@ -31,10 +31,13 @@ jobs:
       - name: Run mkVersionDir.js from ./build folder (Make version folder from ./dist)
         run: deno run -A ./build/mkVersionDir.js ${{ inputs.version }}
       - name: Build aarch64-linux
-        run: |
-          nix build '.#nixosConfigurations.rpi-nix.config.system.build.sdImage'
-          nix flake check
-      - name: (Wave 1) Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
+      - uses: pguyot/arm-runner-action@v2
+        with:
+          base_image: raspios_lite_arm64:latest
+          commands: |
+            nix build '.#nixosConfigurations.rpi-nix.config.system.build.sdImage'
+            nix flake check
+      - name: Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
         run: deno run -A ./build/moveFlakeResult.js ${{ inputs.version }} desktop
       - name: Run compressVersion.js from ./build folder (Compress disk image to Facebook Zstandart)
         run: deno run -A ./build/compressVersion.js ${{ inputs.version }}
