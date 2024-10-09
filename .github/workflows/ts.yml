@@ -21,6 +21,8 @@ jobs:
         run: touch nixagain-${{ inputs.version }}.img
       - name: Make a symlink from the file
         run: ln -s nixagain-${{ inputs.version }}.img result
+      - name: Ls'ed main repo
+        run: ls
       - name: Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
         run: deno run -A ./build/moveFlakeResult.js ${{ inputs.version }} desktop
       - name: Run compressVersion.js from ./build folder (Compress disk image to Facebook Zstandart)
