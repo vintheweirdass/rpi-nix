@@ -7,12 +7,12 @@ import {promisify} from "node:util"
 import {exec as _exec} from "node:child_process"
 const exec = promisify(_exec)
 
-import {copyFile, readlink,rm } from "node:fs/promises";
+import {copyFile,rm } from "node:fs/promises";
 import {join} from "node:path";
 
 const cwd = Deno.cwd()
 const version = Deno.args[0]
 const name = Deno.args[1]
-const sympth = await readlink(join(cwd, "result"))
+const sympth = await Deno.symlinkSync(join(cwd, "result"))
 await copyFile(sympth, join(cwd,"dist", version, `${version}-${name}.img`))
 await rm(join(cwd, "result"))
