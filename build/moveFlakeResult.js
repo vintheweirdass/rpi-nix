@@ -18,5 +18,3 @@ await copyFile(sympth, join(cwd,"dist", version, `${version}-${name}-releasedate
       dateStyle: 'medium',
       timeStyle: 'short'
     })}.img`))
-// clean nix-store, FUCK
-await exec('sudo nix-store --gc --print-roots')
