@@ -18,7 +18,7 @@ jobs:
           ref: 'master'
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: (NUKE) delete temp
-        run: export SHIT="$PWD"; cd /tmp; sudo rm -rf *; cd ..
+        run: export TMPDIR=/tmp; export SHIT="$PWD"; cd /tmp; sudo rm -rf *; cd ..
       - name: (NUKE v2) delete soo many temps that idk what is this
         run: sudo rm -rf /usr/share/dotnet; sudo rm -rf /opt/ghc; sudo rm -rf "/usr/local/share/boost"; sudo rm -rf "$AGENT_TOOLSDIRECTORY"; cd "$SHIT"
       - uses: docker/setup-qemu-action@v3
