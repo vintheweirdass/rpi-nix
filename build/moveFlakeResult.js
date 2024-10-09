@@ -14,5 +14,6 @@ const cwd = Deno.cwd()
 const version = Deno.args[0]
 const name = Deno.args[1]
 const sympth = await Deno.readLinkSync(join(cwd, "result"))
+await Deno.mkdir(sympth, join(cwd,"dist", version))
 await Deno.copyFile(sympth, join(cwd,"dist", version, `${version}-${name}.img`))
 await rm(join(cwd, "result"))
