@@ -65,7 +65,8 @@
           i2c1.enable = true;
           # consumes too much power
           # leds.act.enable = true;
-          audio.enable = true;
+          # 'cant find symbol audio', bcs idgaf about jack output. Bluetooth seems to be worth it on headless or desktop
+          # audio.enable = true;
           apply-overlays-dtmerge.enable = true;
           # ze bluetooth dewise is ready to paer
           bluetooth.enable = true;
