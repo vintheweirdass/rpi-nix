@@ -21,7 +21,7 @@ jobs:
       - uses: cachix/install-nix-action@v27
         with:
           extra_nix_config: |
-            extra-platforms = aarch64-linux i686-linux
+           extra-platforms = aarch64-linux i686-linux
       - uses: denoland/setup-deno@v1.5.1
       - name: Pull everything no matter what
         run: git pull
