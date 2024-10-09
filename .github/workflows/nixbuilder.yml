@@ -17,6 +17,11 @@ jobs:
           repository: cupglassDEV/rpi-nix
           ref: 'master'
           token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/setup-qemu-action@v3
+      - uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            extra-platforms = aarch64-linux i686-linux
       - uses: denoland/setup-deno@v1.5.1
       - name: Pull everything no matter what
         run: git pull
@@ -25,11 +30,9 @@ jobs:
       - name: Run mkVersionDir.js from ./build folder (Make version folder from ./dist)
         run: deno run -A ./build/mkVersionDir.js ${{ inputs.version }}
         # fuck deprecation, embrace the os itself
-      - uses: pguyot/arm-runner-action@v2
-        with:
-          base_image: raspios_lite_arm64:latest
-          commands: |
-            sudo apt-get -y install nix-bin git
+      - name: Build the image itself
+        run:
+            sudo nix flake update
             sudo nix build '.#nixosConfigurations.rpi-nix.config.system.build.sdImage' --extra-experimental-features nix-command --extra-experimental-features flakes
       - name: Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
         run: deno run -A ./build/moveFlakeResult.js ${{ inputs.version }} desktop
