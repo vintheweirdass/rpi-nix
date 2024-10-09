@@ -1,5 +1,6 @@
 
-<p>Seems the rewrite worked, ill give you an update if this thing already finished</p>
+<p>It dosent successfuly build on github action, but weirdly it does on my raspberry pi</p>
+<p>js bcs of 'git is not a repo'</p>
 
 ![image info](./doc/cmdbuild.png)
 
@@ -9,13 +10,7 @@ This is my Nixos build for my raspberry pi 4.
 Bcs im new to nix, credit to this youtube video for guiding me to this thing
 https://www.youtube.com/watch?v=VIuPRL6Ucgk
 
-## NOTE 
-As always, no UBOOT. It will be buggy SO MUCH on the Raspberry pi itself
-
-For the upcoming updates, this package is using BOTH of the Nixos' linux and Raspberry pi's nixos-community package. So it will be lag so much on build
-
-But for normal experience with my pi, its fine tbh
-### FAQ
+## FAQ
 Q: Why (back then) you disabled the `hardware.enableRedistributableFirmware`
 
 A: First of all, raspberry pi is mostly closed source. Their device tree needs to be updated EXACTLY at this repo https://github.com/raspberrypi/firmware.
