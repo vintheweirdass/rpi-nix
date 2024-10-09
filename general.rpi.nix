@@ -83,6 +83,26 @@
         # TODO: delete that fucking 'xserver' on 24.05 and onwards
         desktopManager.plasma6.enable = true;
       };
+      environment.plasma6.excludePackages = with pkgs.kdePackages; [
+        plasma-browser-integration
+        # konsole is ok tho
+        # konsole
+
+        # because IT IS, a small arm cpu cannot run this shit on the raspberry pi
+        kdenlive 
+        oxygen
+        ark
+        elisa
+        gwenview
+        okular
+        kate
+        khelpcenter
+        print-manager
+        dolphin
+        dolphin-plugins
+        spectacle
+        ffmpegthumbs
+      ];
       programs.zsh.enable = true;
        users = {
         #the nix.dev manual is outdated
@@ -92,7 +112,7 @@
         users.cupglassdev = {
               password = "admin";
               shell = pkgs.zsh;
-              description = "change this, ok?";
+              description = "hi rpi-nix fan!";
               isNormalUser = true;
               # add networkmanager if gnome
               extraGroups = ["wheel"];
