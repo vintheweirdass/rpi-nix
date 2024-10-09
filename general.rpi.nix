@@ -26,30 +26,30 @@
         boot = {
           loader.generic-extlinux-compatible.enable = true;
           kernelParams = [ "console=serial0,115200n8" "console=tty1" ];
-        }
+        };
         time.timeZone = "Asia/Jakarta";
-        system = {
           disabledModules = [
             "profiles/base.nix"
           ];
-           system.stateVersion = "24.05"
+        system = {
+           stateVersion = "24.05";
         };
         fileSystems = {
         "/" = {
           fsType = "ext4";
-          device = "/dev/disk/by-uuid/${initial.evaluation.config.sdImage.rootPartitionUUID}";
+          device = "/dev/disk/by-label/NIXOS_SD";
           # they dont have a built-in rtc, cuh
           options = ["noatime"];
         };
         "/boot" = {
           # nikocado avocado moment
           fsType = "fat32";
-          device = "/dev/disk/by-label/${initial.evaluation.config.sdImage.firmwarePartitionName}";
+          device = "/dev/disk/by-label/BOOT";
           # not gud for nix and the rpi itself, every time it rebuilds, some package will take the boot partition to edit
           # the config.txt
           # options = [ "ro" ];
           depends = [ "/" ];
-        }
+        };
         };
         security = {
           sudo = {
@@ -62,13 +62,13 @@
         raspberry-pi."4" = {
           fkms-3d.enable = true;
           # yes, enabled by default since it dosent have any multiple functions to these pins
-          i2c1.enable = true
+          i2c1.enable = true;
           # consumes too much power
-          leds.act.enable = true;
+          # leds.act.enable = true;
           audio.enable = true;
           apply-overlays-dtmerge.enable = true;
           # ze bluetooth dewise is ready to paer
-          bluetooth.enable = true
+          bluetooth.enable = true;
         };
         # stupid, only works on compute model
         # boot.kernelParams = [ "snd_bcm2835.enable_hdmi=1" ];
@@ -82,6 +82,7 @@
         # TODO: delete that fucking 'xserver' on 24.05 and onwards
         desktopManager.plasma6.enable = true;
       };
+      programs.zsh.enable = true;
        users = {
         #the nix.dev manual is outdated
         #who the hell, who was using a fricking rpi 1??

@@ -1,5 +1,7 @@
 
-<p>Rewrite is on the way, do not even build for any reason</p>
+<p>Seems the rewrite worked, ill give you an update if this thing already finished</p>
+
+![image info](./doc/cmdbuild.png)
 
 # Rpi-nix
 This is my Nixos build for my raspberry pi 4.

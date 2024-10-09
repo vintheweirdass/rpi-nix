@@ -5,6 +5,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
     nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
+    
   };
 
   outputs = { self, nixpkgs, nixos-hardware, nixpkgs-wayland, ... }:
@@ -24,10 +25,13 @@
             trusted-public-keys = [
               "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
               "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+              "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs="
+              
             ];
             substituters = [
               "https://cache.nixos.org"
               "https://nixpkgs-wayland.cachix.org"
+              "https://cache.flox.dev"
             ];
           };
 
@@ -53,7 +57,6 @@
         deno
         zsh
         devenv
-        flox
         ];
         };
       })
