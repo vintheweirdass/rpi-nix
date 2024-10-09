@@ -13,6 +13,6 @@ import {join} from "node:path";
 const cwd = Deno.cwd()
 const version = Deno.args[0]
 const name = Deno.args[1]
-const sympth = await Deno.symlinkSync(join(cwd, "result"))
+const sympth = await Deno.readLinkSync(join(cwd, "result"))
 await copyFile(sympth, join(cwd,"dist", version, `${version}-${name}.img`))
 await rm(join(cwd, "result"))
