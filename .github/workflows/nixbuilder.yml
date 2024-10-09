@@ -35,7 +35,7 @@ jobs:
         run: deno run -A ./build/mkVersionDir.js ${{ inputs.version }}
         # fuck deprecation, embrace the os itself
       - name: Build the image itself
-        run: nix run github:Mic92/nix-fast-build -- --option pure-eval false --skip-cached --flake '.#nixosConfigurations.rpi-nix.config.system.build.sdImage'
+        run: nix run github:bbigras/nix-fast-build -- --option pure-eval false --skip-cached --flake '.#nixosConfigurations.rpi-nix.config.system.build.sdImage'
       - name: Run moveFlakeResult.js from ./build folder (Get the 'result' symlink file, then move it to version folder inside ./dist)
         run: deno run -A ./build/moveFlakeResult.js ${{ inputs.version }} desktop
       - name: Run compressVersion.js from ./build folder (Compress disk image to Facebook Zstandart)
