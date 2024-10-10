@@ -1,4 +1,4 @@
-<b>BREAKING CHANGE IF YOU USE MY ONE OF THE GITHUB ACTION</b>
+<b>BREAKING CHANGE IF YOU USE ONE OF MY GITHUB ACTION</b>
 <p>The repo (for distribution only) will be moved to <a href="https://github.com/cupglassdev/rpi-nix-dist">this repo</a></p>
 
 ![image info](./doc/cmdbuild.png)
