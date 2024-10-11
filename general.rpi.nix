@@ -11,17 +11,6 @@
   #no zfs please
   boot.supportedFilesystems.zfs = lib.mkForce false;
 
-        # fuck uboot, thats the reason why you need to fork a fucking rpi linux fork, and its OPEN SOURCE FOR THAT SPECIFIC RPI DISTRO
-        # and now you, maintainers said "we dont want to repeat the problem from the previous rpi" (4b, 3b, and the earlier ones)
-        # and still defend to do a fucking plain linux
-        # u dumbass need to test it out, not just commenting out, then closing the issue without an hassle
-        # (no, im not talking about the stale bot, its litteraly the maintainer itself who closes so many raspberry pi issues on their official github
-        # and the issue still ongoing, not solved)
-
-        # and untill now im still suffering from this specific issue https://github.com/NixOS/nixpkgs/issues/173948
-        # and this shit https://github.com/NixOS/nixpkgs/issues/173948#issuecomment-1718069205 for the next update
-
-        # whos the raspberry pi nixos-specific maintainer at this point
         #lib.mkForce false;
         boot = {
           loader.generic-extlinux-compatible.enable = true;
