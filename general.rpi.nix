@@ -4,7 +4,7 @@
     firewall.enable = false;
     #networkManager.enable = true;
     #hostName = "rpinix";
-  };
+  };services.samba.enable = lib.mkForce false;
   # TODO: make a separate firewall version and the non-firewall version | networking.firewall.allowedTCPPorts = [ 22 80 443 5900 ];
   nixpkgs.config.allowUnfree = true;
   services.openssh.enable = true;
@@ -115,7 +115,7 @@
               description = "hi rpi-nix fan!";
               isNormalUser = true;
               # add networkmanager if gnome
-              extraGroups = ["wheel"];
+              extraGroups = ["wheel" "networkmanager"];
         };
        };
 }
