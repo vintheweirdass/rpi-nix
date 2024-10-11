@@ -57,7 +57,6 @@
         deno
         zsh
         devenv
-        firefox
         ];
         };
       })
