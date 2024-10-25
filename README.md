@@ -1,12 +1,5 @@
-<b>BREAKING CHANGE IF YOU USE ONE OF MY GITHUB ACTION</b>
-<p>The repo (for distribution only) will be moved to <a href="https://github.com/cupglassdev/rpi-nix-dist">this repo</a></p>
-
-Heres the roadmap for the Github Action (btw deno is reforming their old self with 2.0, congrats!):
-- Phase to separate repo
-- Migrate all api to Deno (not node:fs, etc)
-- --allow-all is bad. Prob going to change it but not now
-
-![image info](./doc/cmdbuild.png)
+We need your feedback here! As of now my time is very passive for doing this thing
+Ill be back in next year
 
 # Rpi-nix
 This is my Nixos build for my raspberry pi 4.
